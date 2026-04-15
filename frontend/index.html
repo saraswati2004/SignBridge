@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SignBridge — Sign Language Translator</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <div class="nav-logo">Sign<span>Bridge</span></div>
+    <div class="nav-links">
+      <a href="#home" onclick="showPage('home')">Home</a>
+      <a href="#about" onclick="showPage('home')">About</a>
+      <a href="#features" onclick="showPage('home')">Features</a>
+      <a href="#how" onclick="showPage('home')">How It Works</a>
+    </div>
+    <button class="nav-cta" onclick="activateTranslator()">Open Translator</button>
+  </nav>
+
+  <!-- ════════════════════════════════════════════
+       HOME PAGE
+  ════════════════════════════════════════════ -->
+  <div id="homePage">
+
+    <!-- HERO -->
+    <section id="home">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+
+      <div class="hero-tag">✦ AI-Powered Real-Time Translation</div>
+      <h1 class="hero-title">Bridging the Gap Between <em>Sign</em> & Speech</h1>
+      <p class="hero-sub">
+        SignBridge uses deep learning to translate American Sign Language gestures into text in real-time — making communication seamless, inclusive, and instant.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="activateTranslator()">Start Translating</button>
+        <button class="btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+      </div>
+
+      <div class="spacebar-hint">
+        <div class="key-icon" id="spaceKey">SPACE</div>
+        <span>press to open camera</span>
+      </div>
+
+      <div style="margin-top: 5rem; width: 100%; max-width: 900px;">
+        <div class="stats-bar">
+          <div class="stat-item"><div class="stat-num">26+</div><div class="stat-label">ASL Letters</div></div>
+          <div class="stat-item"><div class="stat-num">97%</div><div class="stat-label">Accuracy</div></div>
+          <div class="stat-item"><div class="stat-num">&lt;50ms</div><div class="stat-label">Latency</div></div>
+          <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">Always</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">// About SignBridge</div>
+          <h2>Making ASL <span>visible</span> to everyone</h2>
+          <p>
+            SignBridge is an open-source platform that harnesses the power of computer vision and machine learning to recognize and translate American Sign Language in real time.
+          </p>
+          <p>
+            Our Django backend processes each video frame through a trained CNN model, detecting hand landmarks and predicting the corresponding ASL letter — all within milliseconds.
+          </p>
+          <p>
+            Whether you're Deaf, hard of hearing, a student learning ASL, or building more inclusive tools, SignBridge gives you instant, accurate translation through just a webcam.
+          </p>
+          <button class="btn-primary" onclick="activateTranslator()" style="margin-top:1.5rem">Try It Now →</button>
+        </div>
+        <div class="about-visual">
+          <div class="asl-card asl-card-sm1">
+            <span class="mini-emoji">🖐️</span>
+            <div style="color:var(--accent);font-size:0.8rem;font-weight:700">OPEN HAND</div>
+            <div style="margin-top:0.3rem">Detected: <strong style="color:var(--text)">B</strong></div>
+          </div>
+          <div class="asl-card asl-card-main">
+            <div class="asl-hand">🤟</div>
+            <div class="asl-letter">I Love You</div>
+          </div>
+          <div class="asl-card asl-card-sm2">
+            <span class="mini-emoji">☝️</span>
+            <div style="color:var(--accent);font-size:0.8rem;font-weight:700">INDEX UP</div>
+            <div style="margin-top:0.3rem">Detected: <strong style="color:var(--text)">D</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="features-inner">
+        <div class="features-header">
+          <div class="section-label">// Features</div>
+          <h2>Everything you need<br>to communicate freely</h2>
+          <p>Built for speed, accuracy, and accessibility from the ground up.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-green">⚡</div>
+            <h3>Real-Time Detection</h3>
+            <p>Frame-by-frame analysis delivers predictions under 50ms, powered by an optimized CNN running in Django with OpenCV preprocessing.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">🧠</div>
+            <h3>Deep Learning Model</h3>
+            <p>Trained on thousands of labeled ASL images, our model accurately distinguishes all 26 alphabet letters plus common phrases.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-red">🔒</div>
+            <h3>Privacy First</h3>
+            <p>Video is processed locally in your browser — only compressed frames are sent to the server. No footage is stored or recorded.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-green">📝</div>
+            <h3>Sentence Builder</h3>
+            <p>Consecutive predictions are assembled into words and sentences in real-time, with smart debouncing to eliminate duplicates.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">🎯</div>
+            <h3>Confidence Scores</h3>
+            <p>Each prediction includes a confidence percentage and top-5 alternatives, letting you verify or override the result instantly.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon icon-red">🌐</div>
+            <h3>Open Source</h3>
+            <p>SignBridge is fully open source. Fork it, extend it to more sign languages, or integrate it into your own accessibility tools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="section-label">// How It Works</div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem)">Four steps from gesture to text</h2>
+      <div class="how-steps">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4>Open Camera</h4>
+          <p>Press Space to activate your webcam. No downloads. No plugins. Works in any modern browser.</p>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4>Show Your Hand</h4>
+          <p>Position your hand in the frame and form ASL letters. The green bounding box guides your placement.</p>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4>Django Predicts</h4>
+          <p>Frames are sent to the Django API, processed by the CNN model, and a prediction returns in milliseconds.</p>
+          <span class="step-arrow">›</span>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h4>Read the Text</h4>
+          <p>Detected letters build into words and sentences. Copy, speak, or share your translated message.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© 2025 SignBridge — Inclusive Tech</div>
+      <div>Built with Django + OpenCV + CNN</div>
+      <div><a href="#">GitHub</a> · <a href="#">Docs</a> · <a href="#">API</a></div>
+    </footer>
+
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       TRANSLATOR PAGE
+  ════════════════════════════════════════════ -->
+  <div id="translatorPage" style="display:none">
+    <section id="translator" class="active">
+
+      <div class="translator-title">Sign<span>Bridge</span> Translator</div>
+      <div class="translator-sub">Position your hand · Hold still · Read the translation</div>
+
+      <div class="translator-layout">
+
+        <!-- CAMERA -->
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div class="camera-panel" id="cameraPanel">
+            <div class="camera-off-msg" id="cameraOff">
+              <div class="cam-icon">📷</div>
+              <div>CAMERA OFFLINE</div>
+              <button class="btn-primary" onclick="startCamera()" style="margin-top:0.5rem;padding:0.6rem 1.5rem;font-size:0.7rem">ENABLE CAMERA</button>
+            </div>
+            <video id="videoFeed" autoplay playsinline style="display:none"></video>
+            <canvas id="overlay"></canvas>
+            <div class="camera-status-bar">
+              <div class="status-dot" id="statusDot"></div>
+              <span id="statusText">OFFLINE</span>
+              <span style="margin-left:auto;color:var(--muted)">FRAME: <span id="frameCount">0</span></span>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.8rem;">
+            <button class="btn-primary" id="toggleCamBtn" onclick="toggleCamera()" style="flex:1;padding:0.65rem">📷 START CAMERA</button>
+            <button class="btn-ghost" onclick="showPage('home')" style="flex:1;padding:0.65rem;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:1px">← BACK TO HOME</button>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="result-panel">
+
+          <div class="prediction-card">
+            <div class="pred-label">Current Prediction</div>
+            <div class="pred-letter" id="predLetter">–</div>
+            <div class="pred-confidence">Confidence: <span id="predConf">–</span></div>
+            <div class="conf-bar"><div class="conf-fill" id="confFill"></div></div>
+          </div>
+
+          <div class="sentence-card">
+            <div class="pred-label">Sentence Builder</div>
+            <div class="sentence-text" id="sentenceText"><span class="cursor"></span></div>
+            <div class="sentence-controls">
+              <button class="ctrl-btn" onclick="addSpace()">SPACE</button>
+              <button class="ctrl-btn" onclick="backspace()">⌫ DEL</button>
+              <button class="ctrl-btn danger" onclick="clearSentence()">CLEAR</button>
+              <button class="ctrl-btn" onclick="copyText()">COPY</button>
+            </div>
+          </div>
+
+          <div class="top-preds">
+            <div class="pred-label" style="margin-bottom:0.6rem">Top Predictions</div>
+            <div id="topPredsList">
+              <div class="top-pred-item"><span class="tp-letter">–</span><div class="tp-bar-wrap"><div class="tp-bar" style="width:0%"></div></div><span class="tp-pct">–</span></div>
+              <div class="top-pred-item"><span class="tp-letter">–</span><div class="tp-bar-wrap"><div class="tp-bar" style="width:0%"></div></div><span class="tp-pct">–</span></div>
+              <div class="top-pred-item"><span class="tp-letter">–</span><div class="tp-bar-wrap"><div class="tp-bar" style="width:0%"></div></div><span class="tp-pct">–</span></div>
+            </div>
+          </div>
+
+          <div class="space-hint-translator">
+            <span class="key-sm">SPACE</span>
+            <span>TOGGLE CAMERA</span>
+            <span style="margin-left:1rem" class="key-sm">ESC</span>
+            <span>BACK HOME</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- External JS -->
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+python-multipart==0.0.9
+pydantic==2.7.1
+numpy==1.26.4
+opencv-python-headless==4.9.0.80
+mediapipe==0.10.14
+tensorflow==2.16.1          # or tensorflow-cpu if no GPU
+ 
