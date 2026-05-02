@@ -30,12 +30,12 @@ from keras.models import model_from_json
 import mediapipe as mp
 
 # ── Label list (must match training order in function.py) ────────────────────
-ACTIONS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']
+ACTIONS = ['hello', 'love you','livelong', 'good', 'bad' , 'yes', 'ok', 'peace', 'good luck', 'rockNroll','right', 'left']
 
 # ── Load saved model once at startup ─────────────────────────────────────────
-with open("model.json", "r") as f:
+with open("model_new.json", "r") as f:
     model = model_from_json(f.read())
-model.load_weights("model_a2i.h5")
+model.load_weights("model_new.h5")
 print("✅  Model loaded successfully.")
 
 # Warm up the model so first real request isn't slow

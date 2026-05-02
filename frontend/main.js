@@ -49,7 +49,7 @@ let lastSend      = 0;
 let isFetching    = false;   // FIX: gate so only ONE request is in-flight at a time
 
 // FIX: increased interval — no point sending faster than server can respond (~80-120ms)
-const FASTAPI_URL       = 'http://127.0.0.1:8000/api/predict/';
+const FASTAPI_URL       = 'http://127.0.0.1:8000/api/predict/'; // FIX: Point to the gesture model in server.py
 const SEND_INTERVAL     = 120;   // ms between sends  (was 80 — caused queue buildup)
 const MIN_CONFIDENCE    = 0.60;  // minimum confidence to show/commit a prediction
 const COMMIT_HOLD_MS    = 600;   // ms a letter must be held before appending to sentence
@@ -188,12 +188,22 @@ async function predictLoop(ts, mySession) {
   const vw = video.videoWidth  || 640;
   const vh = video.videoHeight || 480;
 
-  // FIX: Send the FULL frame, not a cropped version!
-  // Cropping ruins the MediaPipe coordinate scale (x, y, z are relative to image size)
-  // and squashes the aspect ratio, which destroys the neural network's predictions.
-  tmpCtx.drawImage(video, 0, 0, vw, vh, 0, 0, 320, 240);
+  // FIX: The model was trained on CROPPED images, so we must send a similar crop for prediction.
+  // Sending the full frame causes a mismatch between training/prediction data, leading to failure.
+  // We will crop the central 55% width and 80% height of the video, matching the guide box.
+  const cropWidth  = vw * 0.55;
+  const cropHeight = vh * 0.80;
+  const cropX = (vw - cropWidth) / 2;
+  const cropY = (vh - cropHeight) / 2;
 
-  // FIX: this line was entirely missing — b64 was never defined
+  // Draw the cropped portion of the video onto the temporary canvas.
+  // FIX: The previous drawImage call squashed the aspect ratio, causing detection to fail.
+  // We now set the canvas size to match the crop size exactly, creating a 1:1 copy
+  // with no distortion. This will fix hand detection.
+  tmpCanvas.width = cropWidth;
+  tmpCanvas.height = cropHeight;
+  tmpCtx.drawImage(video, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
+
   const b64 = tmpCanvas.toDataURL('image/jpeg', 0.75).split(',')[1];
 
   isFetching = true;
@@ -251,7 +261,7 @@ function updateUI({ prediction, confidence, top5, landmarks_detected }) {
   const validPrediction =
     landmarks_detected === true &&
     typeof prediction === 'string' &&
-    /^[A-Z]$/.test(prediction) &&
+    prediction.length > 0 &&      // FIX: Allow any string/word prediction from the gesture model
     conf >= MIN_CONFIDENCE
       ? prediction
       : NO_PREDICTION;
@@ -271,7 +281,7 @@ function updateUI({ prediction, confidence, top5, landmarks_detected }) {
       const letterToAppend = validPrediction;
       debounceTimer = setTimeout(() => {
         if (lastLetter === letterToAppend) {
-          sentence += letterToAppend;
+          sentence += letterToAppend + ' '; // FIX: Add a space after each predicted word
           renderSentence();
         }
       }, COMMIT_HOLD_MS);
@@ -327,7 +337,17 @@ function renderSentence() {
     sentence + '<span class="cursor"></span>';
 }
 function addSpace()      { sentence += ' ';                 renderSentence(); }
-function backspace()     { sentence = sentence.slice(0,-1); renderSentence(); }
+function backspace()     {
+  // FIX: Delete the last word, not just the last character
+  const trimmed = sentence.trimEnd();
+  const lastSpaceIndex = trimmed.lastIndexOf(' ');
+  if (lastSpaceIndex === -1) {
+    sentence = ''; // If no spaces, clear the whole sentence
+  } else {
+    sentence = trimmed.substring(0, lastSpaceIndex + 1);
+  }
+  renderSentence();
+}
 function clearSentence() { sentence = ''; lastLetter = '';  renderSentence(); }
 function copyText() {
   if (!sentence.trim()) return;
