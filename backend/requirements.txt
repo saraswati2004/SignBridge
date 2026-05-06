@@ -5,4 +5,4 @@ pydantic==2.7.1
 numpy==1.26.4
 opencv-python-headless==4.9.0.80
 mediapipe==0.10.35
-tensorflow==2.16.1
+tensorflow-cpu==2.16.1
