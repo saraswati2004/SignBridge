@@ -20,7 +20,7 @@ Requirements:
 
 import base64
 import traceback
-
+import uvicorn
 import cv2
 import numpy as np
 from fastapi import FastAPI
@@ -150,7 +150,3 @@ async def predict(req: FrameRequest):
 def health():
     return {"status": "ok", "actions": ACTIONS}
 
-# ── Run directly ──────────────────────────────────────────────────────────────
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("server:app", host="127.0.0.1", port=8000, reload=False)
