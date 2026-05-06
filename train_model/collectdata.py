@@ -3,9 +3,9 @@ import cv2
 
 directory = r"E:\project\training model\Image"
 
-ACTIONS = ['hello', 'love you','livelong', 'good', 'bad' , 'yes', 'ok', 'peace', 'good luck', 'rockNroll','right', 'left']
+ACTIONS = ['hello', 'love you','livelong', 'good', 'bad' , 'yes', 'ok', 'peace', 'good luck', 'rockNroll','right', 'left','call me','power','up','tiny']
 ACTION_KEYS = {'1': 'hello', '2': 'love you', '3': 'livelong', '4': 'good',
-               '5': 'bad', '6': 'yes', '7': 'ok', '8': 'peace', '9': 'good luck','0': 'rockNroll', 'r': 'right', 'l': 'left'}
+               '5': 'bad', '6': 'yes', '7': 'ok', '8': 'peace', '9': 'good luck','0': 'rockNroll', 'r': 'right', 'l': 'left','c': 'call me','p': 'power','u':'up','t': 'tiny'}
 
 for letter in ACTIONS:
     os.makedirs(os.path.join(directory, letter), exist_ok=True)
