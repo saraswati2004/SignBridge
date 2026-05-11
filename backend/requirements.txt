@@ -1,8 +1,8 @@
-fastapi==0.110.0
-uvicorn[standard]==0.29.0
-python-multipart==0.0.9
+fastapi
+uvicorn
 numpy==1.26.4
-opencv-python-headless==4.9.0.80
-mediapipe==0.10.35
-keras==3.3.3
+tensorflow==2.16.1
 h5py==3.11.0
+opencv-python-headless
+mediapipe
+scikit-learn
