@@ -49,7 +49,7 @@ let lastSend      = 0;
 let isFetching    = false;   // FIX: gate so only ONE request is in-flight at a time
 
 // FIX: increased interval — no point sending faster than server can respond (~80-120ms)
-const FASTAPI_URL       = 'http://127.0.0.1:8000/api/predict/'; // FIX: Point to the gesture model in server.py
+const FASTAPI_URL       = 'https://signbridge-2-8k7z.onrender.com/api/predict/'; // FIX: Point to the gesture model in server.py
 const SEND_INTERVAL     = 120;   // ms between sends  (was 80 — caused queue buildup)
 const MIN_CONFIDENCE    = 0.60;  // minimum confidence to show/commit a prediction
 const COMMIT_HOLD_MS    = 600;   // ms a letter must be held before appending to sentence
