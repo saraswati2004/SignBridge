@@ -4,5 +4,5 @@ numpy==1.26.4
 tensorflow==2.16.1
 h5py==3.11.0
 opencv-python-headless
-mediapipe
+mediapipe==0.10.14
 scikit-learn
