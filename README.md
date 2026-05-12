@@ -130,18 +130,12 @@ The project currently supports static hand gesture recognition.
 ---
 
 ## 📸 Screenshots
-
-Add your project screenshots here.
-
-```bash
-screenshots/
-```
-
-Example:
-
 * Home Page
-* Gesture Detection Window
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/d7b661c9-63c6-4d68-9795-8768a9318fb9" />
+
+
 * Prediction Output
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/d2ac9902-2502-46f6-826f-cf872bfe9d05" />
 
 ---
 
@@ -158,9 +152,16 @@ You can deploy the FastAPI backend on:
 You can deploy the frontend on:
 
 * Vercel
+---
+### 🔗 Live Demo & Project Links
+
+🌐 Live Project
+
+Frontend: [https://your-frontend-link.vercel.app](https://sign-bridge-blond.vercel.app/)
+Backend API: [https://your-backend-link.onrender.com](https://signbridge-2-8k7z.onrender.com/)
+
 
 ---
-
 ## 📌 Future Improvements
 
 * ✨ Add dynamic sign recognition
@@ -170,8 +171,6 @@ You can deploy the frontend on:
 * 🌎 Multi-language support
 
 ---
-
-
 ## 👩‍💻 Author
 
 **Harshita Suvedi**
